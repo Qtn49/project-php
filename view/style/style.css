@@ -1,0 +1,46 @@
+#menu {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-bottom: 10px #293470 solid;
+    background-color: #334295;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#menu li a:hover {
+    background-color: #293470;
+}
+
+#footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    background-color: #334295;
+    border-top: 10px #293470 solid;
+    height: auto;
+    width: 100%;
+}
+
+#footer b a {
+    color: white;
+}
