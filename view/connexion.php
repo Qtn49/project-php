@@ -8,7 +8,7 @@
             <input type="text" id="identifiant"  size="30"><br>
 
             <label for="mot de passe">Mot de passe :</label><br>
-            <input type="text" id="mot de passe"  size="30"><br>
+            <input type="password" id="mot de passe"  size="30"><br>
 
             <button type=""button">Valider</button>
             <button type=""button">Annuler</button>
