@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="Style/connexion.css">
+<link rel="stylesheet" type="text/css" href="style/connexion.css">
 
 <body>
     <div class="grid-container">

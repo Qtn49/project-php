@@ -1,6 +1,4 @@
 
-
-<body>
 <div class="grid-container">
     <div class="cadre-connexion">
 
@@ -15,7 +13,6 @@
 
     </div>
 </div>
-</body>
 
 
 
