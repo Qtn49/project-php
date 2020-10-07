@@ -11,6 +11,15 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    color: #334295;
+}
+
+#menu ul buton {
+    list-style-type: none;
+    margin-right: 20px;
+    overflow: hidden;
+    color: #334295;
+    margin-left: 5px;
 }
 
 #menu li {
