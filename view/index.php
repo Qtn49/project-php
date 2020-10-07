@@ -22,8 +22,9 @@ session_start();
 
 <?php
 
-include 'header.php';
-include 'footer.php';
+//include 'header.php';
+//include 'footer.php';
+include 'ecritureArticle.php';
 
 ?>
 

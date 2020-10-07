@@ -1,6 +1,6 @@
 <?php
 
-include_once 'utils/BDDController.php';
+include_once '../utils/BDDController.php';
 
 class ArticleController
 {
@@ -8,6 +8,7 @@ class ArticleController
     private $titre;
     private $texte;
     private $mode;
+    private $bddController;
 
     /**
      * ArticleController constructor.
@@ -20,6 +21,7 @@ class ArticleController
         $this->titre = $titre;
         $this->texte = $texte;
         $this->mode = $mode;
+        $this->bddController = new BDDController();
     }
 
     /**
@@ -27,8 +29,9 @@ class ArticleController
      */
     public function sendArticle () {
 
-        BDDController::prepareQuery();
-
+        if ($this->checkDatas()) {
+            echo ($this->bddController->prepareQuery("INSERT INTO Article (Article.date_arti, Article.date_modif_arti, Article.titre_arti, Article.texte_arti, Article.mode_arti) VALUES (CURRENT_DATE(), NULL, ?, ?, ?);", [$this->titre, $this->texte, $this->mode]));
+        }
     }
 
     /**
@@ -45,6 +48,8 @@ class ArticleController
         $this->titre = htmlspecialchars($this->titre);
         $this->texte = htmlspecialchars($this->texte);
         $this->mode = htmlspecialchars($this->mode);
+
+        return true;
 
     }
 
