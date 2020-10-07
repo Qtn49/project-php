@@ -1,6 +1,6 @@
 <?php
 
-
+include_once 'utils/BDDController.php';
 class ConnexionController
 {
 
@@ -20,6 +20,7 @@ class ConnexionController
      */
     public function checkConnection () {
 
+        BDDController::prepareQuery();
 
     }
 

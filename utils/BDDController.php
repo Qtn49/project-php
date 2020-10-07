@@ -33,7 +33,7 @@ class BDDController
 
     }
 
-    public static function prepareQuery ($query, array $params) {
+    public static function prepareQuery ($query, array $params) {           // données entrées par l'utilisateur
 
         $response = self::$db->prepare($query);
         return $response->execute($params);
