@@ -40,4 +40,11 @@ class BDDController
 
     }
 
+    public function prepareQuery ($query, array $params) {
+
+        $response = $this->db->prepare($query);
+        return $response->execute($params);
+
+    }
+
 }
