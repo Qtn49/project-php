@@ -11,33 +11,33 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form method="post" >
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="nom">
+                            <input type="text" class="form-control" placeholder="nom" name="nom">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="prénom">
+                            <input type="text" class="form-control" placeholder="prénom" name="prenom">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="email" class="form-control" placeholder="mail">
+                            <input type="email" class="form-control" placeholder="mail" name="mail">
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password">
+                            <input type="password" class="form-control" placeholder="password" name="password">
                         </div>
                         <div class="form-group" align="center">
                             <input type="submit" value="S'inscrire" class="btn float-right login_btn">
@@ -49,3 +49,15 @@
         </div>
     </div>
 </main>
+
+<?php
+
+include_once '../controller/InscriptionController.php';
+
+$inscriptionController = new InscriptionController($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['password']);
+
+if ($inscriptionController->checkDatas()) {
+    $inscriptionController->updateDataBase();
+    $inscriptionController->setSession();
+    header('location: index.php');
+}
