@@ -1,6 +1,8 @@
 <?php
 
-include_once "../controller/BDDController.php";
+include_once "../utils/BDDController.php";
+
+session_start();
 
 ?>
 <!Doctype html>
@@ -22,9 +24,6 @@ include_once "../controller/BDDController.php";
 
 include 'header.php';
 include 'footer.php';
-
-$bddController = new BDDController();
-print_r($bddController->executeQuery("SELECT * FROM Article"));
 
 ?>
 
