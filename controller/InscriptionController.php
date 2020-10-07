@@ -36,6 +36,11 @@ class InscriptionController
      */
     public function checkDatas()
     {
+        if (!(empty($this->nom)) && !(empty($this->prenom)) && !(empty($this->mail)) && !(empty($this->password)) &&
+            (preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $this->mail))) {
+            return true;
+        }
+        return false;
     }
 
     /**
