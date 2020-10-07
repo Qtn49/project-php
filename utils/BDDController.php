@@ -4,7 +4,7 @@
 class BDDController
 {
 
-    private $db;
+    private static $db;
 
     public function __construct()
     {
@@ -12,7 +12,7 @@ class BDDController
         include_once '../model/database.inc.php';
 
         try {
-            $this->db = new PDO("$server:host=$host;dbname=$base", $user, $pass);
+            self::$db = new PDO("$server:host=$host;dbname=$base", $user, $pass);
         }catch (Exception $e) {
             echo $e;
         }
@@ -22,22 +22,21 @@ class BDDController
     /**
      * @return PDO
      */
-    public function getDb()
+    public static function getDb()
     {
-        return $this->db;
+        return self::$db;
     }
 
-    /**
-     * @param PDO $db
-     */
-    public function setDb($db)
-    {
-        $this->db = $db;
+    public static function executeQuery ($query) {
+
+        return self::$db->query($query);
+
     }
 
-    public function executeQuery ($query) {
+    public static function prepareQuery ($query, array $params) {
 
-        return $this->db->query($query);
+        $response = self::$db->prepare($query);
+        return $response->execute($params);
 
     }
 
