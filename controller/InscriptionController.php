@@ -29,7 +29,6 @@ class InscriptionController
      *
      * Vérifier la cohérence des données à l'aide des regex
      * utiliser la fonction empty() pour vérifier que la variable n'est pas vide
-     * utiliser la fonction isset() pour vérifier que la variable existe
      *
      * @return true : si les données sont correctes
      * @return false : si les données sont incomplètes ou faussées
@@ -53,7 +52,8 @@ class InscriptionController
      */
     public function updateDataBase()
     {
-
+        $query = "INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES '$this->nom', '$this->prenom', '$this->mail', 'MD5($this->password)'";
+        executeQuery($query);
     }
 
     /**
