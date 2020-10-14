@@ -1,0 +1,26 @@
+body {
+    background-color: #60ACF5;
+    color: white;
+    font-family: Arial ;
+    font: bold;
+    align-content: center;
+    align-items: center;
+}
+
+button {
+    background-color: white;
+    margin: 4px;
+}
+
+.grid-container {
+    display:grid;
+    grid-template-columns: 10vw auto 10vw;
+    grid-template-rows: 10vh  auto 10vh;
+}
+
+.cadre-connexion {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    background-color: #0a4d8c;
+    text-align: center;
+}
