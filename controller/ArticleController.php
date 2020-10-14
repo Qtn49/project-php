@@ -31,6 +31,7 @@ class ArticleController
 
         if ($this->checkDatas()) {
             echo ($this->bddController->prepareQuery("INSERT INTO Article (Article.date_arti, Article.date_modif_arti, Article.titre_arti, Article.texte_arti, Article.mode_arti) VALUES (CURRENT_DATE(), NULL, ?, ?, ?);", [$this->titre, $this->texte, $this->mode]));
+            header('Location: index.php');
         }
     }
 
