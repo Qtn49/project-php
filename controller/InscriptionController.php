@@ -52,8 +52,9 @@ class InscriptionController
      */
     public function updateDataBase()
     {
-        $query = "INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES '$this->nom', '$this->prenom', '$this->mail', 'MD5($this->password)'";
-        executeQuery($query);
+        $array = array($this->nom, $this->prenom, $this->mail, $this->password);
+        $query = "INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES ?, ?, ?, 'MD5('?')'";
+        prepareQuery($query, $array);
     }
 
     /**
