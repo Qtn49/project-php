@@ -1,3 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inscription</title>
+    <?php
+
+    include "style_import.php";
+
+    ?>
+</head>
+<body>
+
+<?php
+
+include "header.php";
+
+?>
+
 <main>
     <div class="container">
         <div class="d-flex justify-content-center h-100">
@@ -50,6 +72,7 @@
     </div>
 </main>
 
+
 <?php
 
 include_once '../controller/InscriptionController.php';
@@ -61,3 +84,14 @@ if ($inscriptionController->checkDatas()) {
     $inscriptionController->setSession();
     header('location: index.php');
 }
+
+?>
+
+<?php
+
+include_once 'footer.php';
+
+?>
+
+</body>
+</html>
