@@ -4,12 +4,15 @@
 class BDDController
 {
 
+    private static $_instance;
     private $db;
 
-    public function __construct()
+    private function __construct()
     {
 
-        include_once '../model/database.inc.php';
+        include_once '../model/data.inc.php';
+
+        self::$_instance = $this;
 
         try {
             $this->db = new PDO("$server:host=$host;dbname=$base", $user, $pass);
@@ -27,20 +30,22 @@ class BDDController
         return $this->db;
     }
 
-    public function executeQuery ($query) {
+    /**
+     * @return BDDController
+     */
+    public static function getInstance()
+    {
 
-        return $this->db->query($query);
+        if (is_null(self::$_instance))
+            self::$_instance = new BDDController;
 
+        return self::$_instance;
     }
 
-    public function prepareQuery ($query, array $params) {
+    public function __call($name, $arguments)
+    {
 
-        $response = $this->db->prepare($query);
-        $result = $response->execute($params);
-
-        print_r($params);
-
-        return $result;
+        return call_user_func_array(array($this->db, $name), $arguments);
 
     }
 

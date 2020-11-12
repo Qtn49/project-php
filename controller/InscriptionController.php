@@ -8,6 +8,7 @@ class InscriptionController
     private $prenom;
     private $mail;
     private $password;
+    private $db;
 
     /**
      * InscriptionController constructor.
@@ -49,18 +50,18 @@ class InscriptionController
     public function updateDataBase()
     {
 
+        $query = "INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES (?, ?, ?, 'MD5(?)')";
+        $this->db->prepare($query);
+        $this->db->execute(array($this->nom, $this->prenom, $this->mail, $this->password));
+
     }
 
     /**
-     * @param array $_SESSION
-     *
-     * met à jour la variable de session
-     *
      */
     public function setSession()
     {
 
-        $_SESSION['nom'];
+//        $_SESSION['nom'] = ;
 
     }
 }
