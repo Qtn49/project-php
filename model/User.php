@@ -8,8 +8,6 @@ class User
     private $prenom;
     private $mail;
     private $password;
-    private static $bdd;
-    private $logged = false;
 
     /**
      * User constructor.
@@ -20,35 +18,64 @@ class User
      */
     public function __construct($nom, $prenom, $mail, $password)
     {
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->mail = $mail;
-        $this->password = $password;
+        $this->nom = htmlspecialchars($nom);
+        $this->prenom = htmlspecialchars($prenom);
+        $this->mail = htmlspecialchars($mail);
+        $this->password = htmlspecialchars($password);
     }
 
-    public static function getAuth($login, $password) {
+    public function updateToDataBase () {
 
-        $query = self::$bdd->prepare("SELECT * FROM Utilisateur WHERE mdp_uti = ?");
-        $query->execute(array(md5($password)));
+        include_once '../utils/BDDController.php';
 
-        $result = $query->fetchAll();
+        $query = BDDController::getInstance()->prepare("INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES (?, ?, ?, MD5(?))");
+        $query->execute(array($this->nom, $this->prenom, $this->mail, $this->password));
 
-        echo $login . '<br>';
+    }
+
+    public static function getAuth($mail, $password) {
+
+        include_once '../utils/BDDController.php';
+
+        echo 'HEYYY';
+
+        $query = BDDController::getInstance()->prepare("SELECT * FROM Utilisateur WHERE mail_uti = ? AND mdp_uti = MD5(?)");
+        $query->execute(array($mail, $password));
+
+        $result = $query->fetch();
+
+        echo $mail . '<br>';
         echo md5($password) . '<br>';
-
-        $this->logged = count($query) > 0;
-
-        $this->login = $login;
-
         print_r($result);
 
-        if ($this->logged) {
-            $_SESSION['id'] = $query->fetchAll()['id_uti'];
-            $_SESSION['login'] = $login;
-            $_SESSION['password'] = md5($password);
+        $user = null;
+
+        if (!empty($result)) {
+
+            $user = new User($result['nom_uti'], $result['prenom_uti'], $result['mail_uti'], $result['mdp_uti']);
+
         }
 
-        return $this->logged;
+        var_dump($user);
+
+        return $user;
+
+    }
+
+    public function checkDatas()
+    {
+
+        return !empty($this->prenom) && !empty($this->nom) && !empty($this->mail) && !empty($this->password);
+
+    }
+
+    public function setSession()
+    {
+
+        $_SESSION['prenom'] = $this->prenom;
+        $_SESSION['nom'] = $this->nom;
+        $_SESSION['mail'] = $this->mail;
+        $_SESSION['password'] = $this->password;
 
     }
 

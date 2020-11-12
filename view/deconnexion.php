@@ -9,10 +9,4 @@ if (!empty($_SESSION)) {
 
 }
 
-if (isset($_COOKIE['login']))
-    setcookie('login', null, time() - 24*3600, null, null, false, true);
-
-if (isset($_COOKIE['password']))
-    setcookie('password', null, time() - 24*3600, null, null, false, true);
-
 header('Location: index.php');

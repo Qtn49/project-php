@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -75,13 +80,13 @@ include "header.php";
 
 <?php
 
-include_once '../controller/InscriptionController.php';
+include_once '../model/User.php';
 
-$inscriptionController = new InscriptionController($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['password']);
+$user = new User($_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['password']);
 
-if ($inscriptionController->checkDatas()) {
-    $inscriptionController->updateDataBase();
-    $inscriptionController->setSession();
+if ($user->checkDatas()) {
+    $user->updateToDataBase();
+    $user->setSession();
     header('location: index.php');
 }
 

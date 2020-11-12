@@ -4,13 +4,15 @@ include_once "../utils/BDDController.php";
 
 session_start();
 
-if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
+if (isset($_SESSION['mail']) && isset($_SESSION['password'])) {
 
-    setcookie('login', $_SESSION['login'], time() + 365*24*3600, null, null, false, true);
-    setcookie('password', $_SESSION['password'], time() + 365*24*3600, null, null, false, true);
+    setcookie('mail', $_SESSION['mail'], time() + 7*24*3600, null, null, false, true);
+    setcookie('password', $_SESSION['password'], time() + 7*24*3600, null, null, false, true);
 
 }
 
+//print_r($_SESSION);
+//print_r($_COOKIE);
 
 ?>
 <!Doctype html>
@@ -49,7 +51,7 @@ include 'header.php';
         ?>
 
         <article>
-            <h1><?php echo $item['titre_arti']; ?> <em>créé le <?php echo $item['date_arti']; ?></em></h1>
+            <h1><?php echo $item['titre_arti']; ?> <em>créé le <?php echo $item['date_arti']; if (!is_null($item['date_modif_arti'])) echo ' (modifié le ' . $item['date_modif_arti'] . ')' ?></em></h1>
             <p><?php echo $item['texte_arti']; ?></p>
         </article>
 

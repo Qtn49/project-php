@@ -37,6 +37,16 @@
 
 }
 
+#menu ul :nth-child(2) {
+
+    color: #60ACF5;
+    display: block;
+    margin: 0 auto;
+    font-size: x-large;
+    font-weight: bold;
+
+}
+
 #footer {
     text-align: center;
     position: fixed;
