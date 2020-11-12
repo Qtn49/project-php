@@ -4,6 +4,14 @@ include_once "../utils/BDDController.php";
 
 session_start();
 
+if (isset($_SESSION['login']) && isset($_SESSION['password'])) {
+
+    setcookie('login', $_SESSION['login'], time() + 365*24*3600, null, null, false, true);
+    setcookie('password', $_SESSION['password'], time() + 365*24*3600, null, null, false, true);
+
+}
+
+
 ?>
 <!Doctype html>
 <html lang="fr">
@@ -12,24 +20,53 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style/inscription.css" >
-    <link rel="stylesheet" href="style/style.css" >
-    <link rel="stylesheet" href="style/connexion.css" >
     <title>Le super blog</title>
+    <?php
+
+    include_once 'style_import.php';
+
+    ?>
 </head>
 <body>
 
 <?php
 
 include 'header.php';
-include 'footer.php';
 
 ?>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<div class="article-container">
+
+    <?php
+
+    $bdd = BDDController::getInstance();
+
+    $query = $bdd->prepare("SELECT * FROM Article WHERE  mode_arti != 'brouillon'");
+    $query->execute(array());
+    $reponse = $query->fetchAll();
+
+    foreach ($reponse as $item) {
+        ?>
+
+        <article>
+            <h1><?php echo $item['titre_arti']; ?> <em>créé le <?php echo $item['date_arti']; ?></em></h1>
+            <p><?php echo $item['texte_arti']; ?></p>
+        </article>
+
+        <?php
+    }
+
+    ?>
+
+</div>
+
+<?php
+
+include 'footer.php';
+
+include 'script_import.php';
+
+?>
 
 </body>
 </html>

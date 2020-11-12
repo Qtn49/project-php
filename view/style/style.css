@@ -40,9 +40,15 @@
     background-color: #293470;
 }
 
+#menu ul :last-child {
+
+    float: right;
+
+}
+
 #footer {
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     background-color: #334295;
     border-top: 10px #293470 solid;
@@ -50,6 +56,35 @@
     width: 100%;
 }
 
+article {
+    margin: 2vh 2vw;
+    border-style: dashed;
+    border-color: #293470;
+    padding: 1ex;
+    align-content: center;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+article h1 {
+    color: black;
+    font-weight: bold;
+}
+
+article h1 em {
+    float: right;
+    font-style: italic;
+    font-size: small;
+    text-align: right;
+}
+
+article p {
+}
+
 #footer b a {
     color: white;
+}
+
+#footer p {
+    margin: 0;
 }

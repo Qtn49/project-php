@@ -1,0 +1,2 @@
+RewriteEngine On
+RedirectMatch (.*)/project-php/?$ $1/project-php/view
