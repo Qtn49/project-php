@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -46,12 +52,16 @@ include 'header.php';
 
 <?php
 
-include_once '../controller/ArticleController.php';
+include_once '../model/Article.php';
 
-$article = new ArticleController($_POST['titre'], $_POST['contenu_article'], "brouillon");
+$article = new Article($_POST['titre'], $_POST['contenu_article'], "brouillon");
 
-$article->sendArticle();
+if ($article->checkDatas()) {
 
+    $article->initToDataBase();
+    header('Location: index.php');
+
+}
 include 'script_import.php';
 
 ?>
