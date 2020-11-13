@@ -8,6 +8,7 @@ class User
     private $prenom;
     private $mail;
     private $password;
+    private $id;
 
     /**
      * User constructor.
@@ -33,11 +34,31 @@ class User
 
     }
 
-    public static function getAuth($mail, $password) {
+    public static function getAuthFromIndex ($index) {
 
         include_once '../utils/BDDController.php';
 
-        echo 'HEYYY';
+        $query = BDDController::getInstance()->prepare("SELECT * FROM Utilisateur WHERE id_uti = ?");
+        $query->execute(array($index));
+
+        $result = $query->fetch();
+
+        $user = null;
+
+        if (!empty($result)) {
+
+            $user = new User($result['nom_uti'], $result['prenom_uti'], $result['mail_uti'], $result['mdp_uti']);
+            $user->id = $result['id_uti'];
+
+        }
+
+        return $user;
+
+    }
+
+    public static function getAuth($mail, $password) {
+
+        include_once '../utils/BDDController.php';
 
         $query = BDDController::getInstance()->prepare("SELECT * FROM Utilisateur WHERE mail_uti = ? AND mdp_uti = MD5(?)");
         $query->execute(array($mail, $password));
@@ -46,17 +67,15 @@ class User
 
         echo $mail . '<br>';
         echo md5($password) . '<br>';
-        print_r($result);
 
         $user = null;
 
         if (!empty($result)) {
 
             $user = new User($result['nom_uti'], $result['prenom_uti'], $result['mail_uti'], $result['mdp_uti']);
+            $user->id = $result['id_uti'];
 
         }
-
-        var_dump($user);
 
         return $user;
 
@@ -72,6 +91,7 @@ class User
     public function setSession()
     {
 
+        $_SESSION['id'] = $this->id;
         $_SESSION['prenom'] = $this->prenom;
         $_SESSION['nom'] = $this->nom;
         $_SESSION['mail'] = $this->mail;

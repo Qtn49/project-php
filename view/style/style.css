@@ -19,7 +19,6 @@
 
 #menu li a {
     display: block;
-    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -31,22 +30,6 @@
     background-color: #293470;
 }
 
-#menu ul :last-child {
-
-    float: right;
-
-}
-
-#menu ul :nth-child(2) {
-
-    color: #60ACF5;
-    display: block;
-    margin: 0 auto;
-    font-size: x-large;
-    font-weight: bold;
-
-}
-
 #footer {
     text-align: center;
     position: fixed;
@@ -55,6 +38,10 @@
     border-top: 10px #293470 solid;
     height: auto;
     width: 100%;
+}
+
+.article-container {
+    margin-bottom: 8vh;
 }
 
 article {
@@ -79,7 +66,10 @@ article h1 em {
     text-align: right;
 }
 
-article p {
+article:hover {
+
+    cursor: pointer;
+    
 }
 
 #footer b a {
@@ -88,4 +78,20 @@ article p {
 
 #footer p {
     margin: 0;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+}
+.link-button:focus {
+    outline: none;
+}
+.link-button:active {
+    color:red;
 }

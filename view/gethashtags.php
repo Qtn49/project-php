@@ -1,14 +1,14 @@
 <?php
 require_once ('../utils/BDDController.php');
 
-$bddController = new BDDController;
+$bddController = BDDController::getInstance();
 
 $keyword = $_POST['term'];
 
 if (isset($keyword)) {
 
     $sql="SELECT hashtag FROM Hashtag WHERE hashtag LIKE '%$keyword%'";
-    $result = $bddController->executeQuery($sql);
+    $result = $bddController->query($sql);
 
     $json=array();
 
