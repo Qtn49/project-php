@@ -1,6 +1,6 @@
 <?php
 
-include_once "../utils/BDDController.php";
+include_once "../utils/Database.php";
 
 session_start();
 
@@ -10,9 +10,6 @@ if (isset($_SESSION['mail']) && isset($_SESSION['password'])) {
     setcookie('password', $_SESSION['password'], time() + 7*24*3600, null, null, false, true);
 
 }
-
-//print_r($_SESSION);
-//print_r($_COOKIE);
 
 ?>
 <!Doctype html>
@@ -41,7 +38,7 @@ include 'header.php';
 
     <?php
 
-    $bdd = BDDController::getInstance();
+    $bdd = Database::getInstance();
 
     $query = $bdd->prepare("SELECT * FROM Article");
     $query->execute(array());

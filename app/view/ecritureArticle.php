@@ -54,7 +54,7 @@ include 'header.php';
 
 include_once '../model/Article.php';
 
-$article = new Article($_POST['titre'], $_POST['contenu_article'], "brouillon");
+$article = new Article( "brouillon", $_POST['titre'], $_POST['contenu_article']);
 
 if ($article->checkDatas()) {
 
@@ -72,25 +72,24 @@ include 'script_import.php';
         location.replace("index.php");
     });
 
-    $("#hashtag").autocomplete({
-        source: (request, response) => {
-            $.ajax({
-                type: "POST",
-                url: "gethashtags.php",
-                dataType: "json",
-                data : {
-                    term: () => {
-                        let mot = request.term.split(' ').last;
-                        return mot;
-                    }
-                },
-                success: (data) => {
-                    console.log(data);
-                    response(data);
-                }
-            });
-        },
-    });
+    // $("#hashtag").autocomplete({
+    //     source: (request, response) => {
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "gethashtags.php",
+    //             dataType: "json",
+    //             data : {
+    //                 term: () => {
+    //                     let mot = request.term.split(' ').last;
+    //                     return mot;
+    //                 }
+    //             },
+    //             success: (data) => {
+    //                 response(data);
+    //             }
+    //         });
+    //     },
+    // });
 
 </script>
 
