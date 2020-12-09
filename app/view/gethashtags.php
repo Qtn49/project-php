@@ -1,7 +1,7 @@
 <?php
-require_once ('../utils/BDDController.php');
+require_once('../utils/Database.php');
 
-$bddController = BDDController::getInstance();
+$bddController = Database::getInstance();
 
 $keyword = $_POST['term'];
 

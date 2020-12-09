@@ -29,9 +29,9 @@ class Article
 
     public static function getArticle ($index) {
 
-        include_once '../utils/BDDController.php';
+        include_once '../utils/Database.php';
 
-        $query = BDDController::getInstance()->prepare("SELECT * FROM Article WHERE id_arti = ?");
+        $query = Database::getInstance()->prepare("SELECT * FROM Article WHERE id_arti = ?");
         $query->execute(array($index));
 
         $reponse = $query->fetch();
@@ -52,10 +52,12 @@ class Article
 
     public function initToDataBase () {
 
-        include_once '../utils/BDDController.php';
+        include_once '../utils/Database.php';
 
-        $query = BDDController::getInstance()->prepare("INSERT INTO Article(date_arti, titre_arti, texte_arti, mode_arti) VALUES (NOW, ?, ?, ?)");
+        $query = Database::getInstance()->prepare("INSERT INTO Article(date_arti, titre_arti, texte_arti, mode_arti) VALUES (NOW, ?, ?, ?)");
         $query->execute(array($this->titre_arti, $this->texte_arti, $this->etat));
+
+//        var_dump($this->titre_arti, $this->texte_arti, $this->etat);
 
     }
 

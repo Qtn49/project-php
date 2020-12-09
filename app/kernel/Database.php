@@ -1,7 +1,7 @@
 <?php
 
 
-class BDDController
+class Database
 {
 
     private static $_instance;
@@ -31,13 +31,13 @@ class BDDController
     }
 
     /**
-     * @return BDDController
+     * @return Database
      */
     public static function getInstance()
     {
 
         if (is_null(self::$_instance))
-            self::$_instance = new BDDController;
+            self::$_instance = new Database;
 
         return self::$_instance;
     }
