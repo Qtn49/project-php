@@ -16,7 +16,12 @@ class Kernel
         // Autoload
         spl_autoload_register(array("Kernel", "autoload"));
 
-        $route = Router::analyze ($_GET);
+        if (empty($_POST))
+            $params = $_GET;
+        else
+            $params = array_merge($_GET, $_POST);
+
+        $route = Router::analyze ($params);
 
         $controller_name = $route["controller"] . "Controller";
 

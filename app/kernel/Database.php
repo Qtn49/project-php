@@ -1,52 +1,34 @@
 <?php
 
-
 class Database
 {
+    static protected $instance = null;
+    protected $db;
 
-    private static $_instance;
-    private $db;
-
-    private function __construct()
+    public function __construct()
     {
+        $this->db = new PDO(
+            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8",
+            DB_USER,
+            DB_PASS
+        );
+    }
 
-        include_once '../model/data.inc.php';
+    public static function getConnexion()
+    {
+        if (is_null (self::$instance)) {
 
-        self::$_instance = $this;
+            self::$instance = new Database();
 
-        try {
-            $this->db = new PDO("$server:host=$host;dbname=$base", $user, $pass);
-        }catch (Exception $e) {
-            echo $e;
         }
-
+        return self::$instance;
     }
 
-    /**
-     * @return PDO
-     */
-    public function getDb()
-    {
-        return $this->db;
-    }
+    public function __call($method, array $arg) {
+        // Si on appelle une méthode qui n'existe pas, on
+        // délègue cet appel à l'objet PDO $this->db
 
-    /**
-     * @return Database
-     */
-    public static function getInstance()
-    {
-
-        if (is_null(self::$_instance))
-            self::$_instance = new Database;
-
-        return self::$_instance;
-    }
-
-    public function __call($name, $arguments)
-    {
-
-        return call_user_func_array(array($this->db, $name), $arguments);
-
+        return call_user_func_array(array($this->db, $method), $arg);
     }
 
 }

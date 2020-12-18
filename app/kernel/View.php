@@ -13,7 +13,7 @@ class View
 
     public function display()
     {
-        $vue = "../app/view/" . $this->route['controller'] . "/" . $this->route['action'] . ".php";
+        $vue = "../app/templates/" . $this->route['controller'] . "/" . $this->route['action'] . ".html.twig";
 
         if (file_exists ($vue)) {
             include ($vue);

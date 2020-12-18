@@ -27,18 +27,15 @@ class User
 
     public function updateToDataBase () {
 
-        include_once '../utils/Database.php';
-
-        $query = Database::getInstance()->prepare("INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES (?, ?, ?, MD5(?))");
+        $query = Database::getConnexion()->prepare("INSERT INTO Utilisateur(nom_uti, prenom_uti, mail_uti, mdp_uti) VALUES (?, ?, ?, MD5(?))");
         $query->execute(array($this->nom, $this->prenom, $this->mail, $this->password));
 
     }
 
     public static function getAuthFromIndex ($index) {
 
-        include_once '../utils/Database.php';
 
-        $query = Database::getInstance()->prepare("SELECT * FROM Utilisateur WHERE id_uti = ?");
+        $query = Database::getConnexion()->prepare("SELECT * FROM Utilisateur WHERE id_uti = ?");
         $query->execute(array($index));
 
         $result = $query->fetch();
@@ -58,9 +55,7 @@ class User
 
     public static function getAuth($mail, $password) {
 
-        include_once '../utils/Database.php';
-
-        $query = Database::getInstance()->prepare("SELECT * FROM Utilisateur WHERE mail_uti = ? AND mdp_uti = MD5(?)");
+        $query = Database::getConnexion()->prepare("SELECT * FROM Utilisateur WHERE mail_uti = ? AND mdp_uti = MD5(?)");
         $query->execute(array($mail, $password));
 
         $result = $query->fetch();
@@ -90,6 +85,8 @@ class User
 
     public function setSession()
     {
+
+        session_start();
 
         $_SESSION['id'] = $this->id;
         $_SESSION['prenom'] = $this->prenom;

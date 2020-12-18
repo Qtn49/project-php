@@ -20,18 +20,29 @@ class Article
      * @param $titre_arti
      * @param $texte_arti
      */
-    public function __construct($etat, $titre_arti, $texte_arti)
+    public function __construct($etat, $titre_arti, $texte_arti, $user_id)
     {
         $this->etat = htmlspecialchars($etat);
         $this->titre_arti = htmlspecialchars($titre_arti);
         $this->texte_arti = htmlspecialchars($texte_arti);
+        $this->user_id = $user_id;
+    }
+
+    public static function getAllArticles () {
+
+        $db = Database::getConnexion();
+
+        $sql = "SELECT * FROM Article";
+        $stmt = $db->prepare ($sql);
+        $stmt->execute ();
+
+        return $stmt->fetchAll ();
+
     }
 
     public static function getArticle ($index) {
 
-        include_once '../utils/Database.php';
-
-        $query = Database::getInstance()->prepare("SELECT * FROM Article WHERE id_arti = ?");
+        $query = Database::getConnexion()->prepare("SELECT * FROM Article WHERE id_arti = ?");
         $query->execute(array($index));
 
         $reponse = $query->fetch();
@@ -40,9 +51,8 @@ class Article
             return null;
         }
 
-        $article = new Article($reponse['mode_arti'], $reponse['titre_arti'], $reponse['texte_arti']);
+        $article = new Article($reponse['mode_arti'], $reponse['titre_arti'], $reponse['texte_arti'], $reponse['id_uti']);
         $article->id_arti = $reponse['id_arti'];
-        $article->user_id = $reponse['id_uti'];
         $article->date_arti = $reponse['date_arti'];
         $article->date_modif_arti = $reponse['date_modif_arti'];
 
@@ -52,10 +62,8 @@ class Article
 
     public function initToDataBase () {
 
-        include_once '../utils/Database.php';
-
-        $query = Database::getInstance()->prepare("INSERT INTO Article(date_arti, titre_arti, texte_arti, mode_arti) VALUES (NOW, ?, ?, ?)");
-        $query->execute(array($this->titre_arti, $this->texte_arti, $this->etat));
+        $query = Database::getConnexion()->prepare("INSERT INTO Article(date_arti, titre_arti, texte_arti, mode_arti, id_uti) VALUES (NOW(), ?, ?, ?, ?)");
+        $query->execute(array($this->titre_arti, $this->texte_arti, $this->etat, $this->user_id));
 
 //        var_dump($this->titre_arti, $this->texte_arti, $this->etat);
 

@@ -1,0 +1,100 @@
+#menu {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    top: 0;
+    position: fixed;
+    border-bottom: 10px #293470 solid;
+    background-color: #334295;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu li a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#menu li a:hover {
+    background-color: #293470;
+}
+
+#footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    background-color: #334295;
+    border-top: 10px #293470 solid;
+    height: auto;
+    width: 100%;
+}
+
+.article-container {
+    margin-bottom: 8vh;
+    margin-top: 10vh;
+}
+
+article {
+    margin: 2vh 2vw;
+    border-style: dashed;
+    border-color: #293470;
+    padding: 1ex;
+    align-content: center;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+article h1 {
+    color: black;
+    font-weight: bold;
+}
+
+article h1 em {
+    float: right;
+    font-style: italic;
+    font-size: small;
+    text-align: right;
+}
+
+article:hover {
+
+    /*cursor: pointer;*/
+    
+}
+
+#footer b a {
+    color: white;
+}
+
+#footer p {
+    margin: 0;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+}
+.link-button:focus {
+    outline: none;
+}
+.link-button:active {
+    color:red;
+}

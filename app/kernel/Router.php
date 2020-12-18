@@ -13,21 +13,24 @@ class Router
         if (count ($params) == 0) { // Appel sans paramètres (affichage de la liste complète)
             $result["controller"] = "Index";
             $result["action"] = "display";
-        } elseif (isset($params["action"]) && isset($params["slug"])) {
+        } elseif (isset($params["action"])) {
+            $result["action"] = $params['action'];
             switch ($params["action"]) {
-                case "do_edit" :
-                    if (isset($params['description'])) {
-                        $result["params"]["description"] = $params['description'];
-                    }
-                    if (isset($params['expiration'])) {
-                        $result["params"]["expiration"] = $params['expiration'];
-                    }
-                case "edit" :
-                case "display" :
-                    $result["controller"] = "Item";
-                    $result["action"] = $params['action'];
-                    $result["params"]["slug"] = $params['slug'];
+                case "connexion" :
+                case "deconnexion":
+                case "inscription" :
+                    $result["controller"] = "Connexion";
+                    $result['params'] = array_slice($params, 1);
+                    var_dump($result);
                     break;
+                case "show":
+                    $result["params"]["index"] = $params['index'];
+                case "ecrireArticle":
+                    $result["controller"] = "Article";
+                    $result["params"] = array_slice($params, 1);
+                    break;
+                case "getHastags":
+                    $result["controller"] = "Hashtag";
                 default :
             }
         } // sinon erreur 404 par défaut

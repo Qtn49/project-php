@@ -1,2 +1,3 @@
 RewriteEngine On
-RedirectMatch (.*)/project-php/?$ $1/project-php/view
+RedirectMatch (.*)/project-php/?$ $1/project-php/www
+#RedirectMatch (.*/project-php/www/)(?!index\.php)(.*)$ $1index.php$3
