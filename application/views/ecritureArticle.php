@@ -1,0 +1,60 @@
+{% extends 'base.php' %}
+
+{% block content %}
+
+<div class="grid-container">
+    <div class="cadre-connexion" style="grid-row: 1/3;margin-top: 10vh;">
+
+        <form method="post" action="?action=ecrireArticle">
+            <label for="titre">Titre :</label><br>
+            <input type="text" id="titre" name="titre"  size="30"><br>
+
+            <label for="contenu_article">Contenu du l'article :</label><br>
+            <textarea id="contenu_article" name="contenu_article" class="m-2" style="resize: none" minlength="10" ></textarea><br>
+
+            <div class="ui-widget">
+                <label for="hashtag">Hashtags : </label><br>
+                <input type="text" id="hashtag" name="hashtags" /><br>
+            </div>
+
+            <button type="submit" class="m-3 mb-4">Valider</button>
+            <button type="button" class="m-3 mb-4">Annuler</button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+    {{ parent() }}
+
+<script>
+    $(':button').click(() => {
+        location.replace("index.php");
+    });
+
+    $("#hashtag").autocomplete({
+        source: (request, response) => {
+            $.ajax({
+                type: "POST",
+                url: "?action=getHastags",
+                dataType: "json",
+                data : {
+                    term: () => {
+                        let mot = request.term.split(' ').last;
+                        return mot;
+                    }
+                },
+                success: (data) => {
+                    response(data);
+                }
+            });
+        },
+    });
+
+</script>
+
+{% endblock %}
